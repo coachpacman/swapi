@@ -1,34 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import axios from 'axios'
 
 function App() {
   const [count, setCount] = useState(0)
 
+  useEffect(() => {
+    axios.get("https://swapi.dev/api/people/").then((data) => {
+      console.log(data);
+    })
+  })
+
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='container-md'>
+      <div className="row">
+        <h1>Star Wars API</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary rounded-0 rounded-start" type="button">search characters</button>
+        </div>
+        <input type="text"className="form-control" placeholder="who?" name="" id="" />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <div className="table-responsive mt-5">
+        <table className='table'>
+          <thead>
+            <tr>
+              <th className='text-start'>Name</th>
+              <th>Birth Date</th>
+              <th>Height</th>
+              <th>Mass</th>
+              <th>Homeworld</th>
+              <th>Species</th>
+            </tr>
+          </thead>
+          <tbody className='table-group-divider'>
+            <tr>
+              <td>Luke Skywalker</td>
+              <td>19BBY</td>
+              <td>172</td>
+              <td>77</td>
+              <td>https://swapi.dev/api/planets/1/</td>
+              <td>not listed</td>
+            </tr>
+          </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul className="pagination">
+            <li className="page-item">
+              <a href="#" className="page-link">Previous</a>
+            </li>
+            <li className="page-item">
+              <a href="#" className="page-link">1</a>
+            </li>
+            <li className="page-item">
+              <a href="#" className="page-link">2</a>
+            </li>
+            <li className="page-item">
+              <a href="#" className="page-link">3</a>
+            </li>
+            <li className="page-item">
+              <a href="#" className="page-link">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   )
 }
 
